@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01-v-model</title>
+    <script src="../js/vue.js"></script>
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script>
+        $(() => {
+            new Vue({
+                el: "#app01",
+                data: {
+                    msg01: "v-mode和表单建立组建的关系",
+                    str: "初始值",
+                    taStr:"123\n123\n123\n13",
+                    gender:""
+
+                }
+
+            });
+
+
+        });
+        let getValue=()=> {
+            let str=$("#aa").val();
+            console.log(str)
+        }
+    </script>
+</head>
+<body>
+    <div id="app01">
+        <h2>{{msg01}}</h2>
+        <hr>
+
+        <pre>
+            v- model
+        </pre>
+        <h3>1.输入组件</h3>
+        <label >用户名：</label>
+        <input type="text" v-model="str" id="aa" value="value上的属性"> <br>
+
+        <label >密码</label>
+        <input type="password" > <br>
+
+
+        <h3>textArea</h3>
+        <textarea name=""  cols="20" rows="10" v-model="taStr">
+            {{msg01}}
+        </textarea>
+        <pre>
+            单选按钮是 同组 互斥的
+            v-model 对于单选按钮的绑定 用于操作 check属性
+            获取的是 选中状态的value 值
+        </pre>
+        <h3>2. 表单的选择组件</h3>
+        <input type="radio" name="gender" id="a" value="a" checked v-model="gender"> a
+        <input type="radio" name="gender" id="b" value="b" v-model="gender"> b
+
+
+        <br>
+    </div>
+    <hr>
+    <input type="button" value="获取值" onclick="getValue()">
+
+</body>
+</html>
