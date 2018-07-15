@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../css/bootstrap.css" rel="stylesheet">
+    <script src="../js/vue.js"></script>
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <title>v-bind</title>
+    <script>
+        let fun1 = () => {
+            console.log(this);
+            console.log("fun1");
+        };
+        let fun2 = () => {
+            console.log("fun2")
+        };
+        let user = {
+            name: ""
+        };
+
+        $(()=>{
+            $("#btn").click(()=>{
+                console.log("btn Jquery");
+            });
+            //Jquery 对于事件的处理，只能完成使用Jquery 方式绑定的事件
+            //Jquery 的事件处理是重新为元素进行新的事件绑定
+            setTimeout(()=>{
+                $("#btn").off("click")
+            },5000);
+
+
+        })
+
+        user.name="tom";
+        user.name="aaa";
+        console.log(user.name);
+    </script>
+</head>
+<body>
+    <!--
+        原生的html事件  实际是给予事件赋值
+        第一次完成事件赋值 后， 对事件进行锁死。。
+        jquery 可以对一个按钮绑定多个事件
+    -->
+    <input type="button" value="按钮"  onclick="fun1()" onclick="fun2()">
+    <input type="button" value="jquery事件" id="btn" onclick="fun2()" >
+
+</body>
+</html>

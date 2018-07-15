@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <script src="../js/vue.js"></script>
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <title>v-on</title>
+    <script>
+        $(()=>{
+            new Vue({
+                el:"#app",
+                data:{
+                    msg:"v-on"
+                },
+                methods:{
+                  show:function() {
+                      console.log(this.msg);
+                      alert("你好，${{msg}}");
+                      this.msg = "aaa";
+                  }
+                }
+            })
+
+        })
+
+    </script>
+</head>
+<body>
+    <pre>
+        v-on 事件绑定
+    </pre>
+    <div id="app">
+        <h2>{{msg}}</h2>
+        <input type="button" value="aaa"  v-on:click="show()">
+    </div>
+</body>
+</html>

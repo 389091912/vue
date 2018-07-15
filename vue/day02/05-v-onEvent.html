@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>V-onBind</title>
+    <link href="../css/bootstrap.css" rel="stylesheet">
+    <!--类库  ...-->
+    <script src="../js/vue.js"></script>
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script>
+        $(() => {
+
+            new Vue({
+                el: "#app",
+                data: {
+                    flag: false,
+                    msg:"message"
+                },
+                methods: {
+                    show() {
+                        console.log("show 函数");
+                    },
+                    show1() {
+                        console.log("show1  函数")
+                    },
+                    show3,
+                    getEvent(e) {
+                        console.log(e);
+                    },
+                    stopEvent(e) {
+                        console.log("----");
+                        e.preventDefault();
+                        console.log("----");
+                    },
+                    fun1(){
+                        console.log("fun1 ....");
+                    },
+                    fun2(e){
+                        e.stopPropagation();
+                        console.log("fun2 ....")
+                    },
+                    printStr(e){
+                    //    console.log(e);
+                        (e.keyCode==13&&e.ctrlKey)?console.log(this.msg):"";
+                    },
+                    printStr1(){
+                          console.log("123123");
+                    },
+                    fun3(){
+                        console.log("fun3 ...");
+                    },
+                    fun4(){
+                        console.log("fun4 ...");
+                    },
+                    fun5(){
+                        console.log("fun5 ...");
+                    }
+                }
+
+
+            });
+
+        });
+        let show3 = () => {
+            console.log("show 3");
+        };
+        let print = (e) => {
+            console.log(e);
+        };
+    </script>
+    <style>
+        .div1 {
+            width: 300px;
+            height: 300px;
+            background-color: red;
+        }
+        .div2{
+            width: 200px;
+            height: 200px;
+            background-color: purple;
+        }
+        .div3 {
+            width: 100px;
+            height: 100px;
+            background-color: deepskyblue;
+        }
+    </style>
+</head>
+<body>
+<div class="center-block">
+    <div class="row" id="app">
+
+        <div class="col-md-5 col-md-offset-2">
+            <!--使用方法名字进行事件绑定-->
+            <input type="button" class="btn btn-info" value="v-on" v-on:click="show" :onclick="show1()" >
+            <!--内连语句-->
+            <input type="button" class="btn btn-info" value="v-on绑定事件1" v-on:click="this.flag=!this.flag" >
+            <!--对于对象的额 注册 不指定参数-->
+            <input type="button" class="btn btn-success" value="v-on事件绑定2" v-on="{mousedown:show3,click:show1}" >
+            <!--event   对象-->
+            <input type="button" class="btn btn-success" value="v-on 获取事件源1" v-on:click="getEvent()" >
+            <!--在使用 v-on 绑定函数时 ， 需要用$ event-->
+            <input type="button" class="btn btn-success" value="v-on 获取事件源2" v-on:click="getEvent($event)" >
+            <!--
+                默认事件阻止
+                    元素的默认事件 不进行， 定义的功能叫默认事件
+                    a 标签  button , submit
+                事件冒泡
+            -->
+            <a href="http://www.baidu.com" class="btn-default" v-on:click="stopEvent($event)">百度</a>
+            <hr>
+            <!--<div class="div1" v-on:click="fun1">-->
+                <!--<div class="div2" v-on:click="fun2($event)">-->
+                <!--</div>-->
+            <!--</div>-->
+
+            <!--
+            .stop - 调用 event.stopPropagation()。
+            .prevent - 调用 event.preventDefault()。
+            .capture - 添加事件侦听器时使用 capture 模式。
+            .self - 只当事件是从侦听器绑定的元素本身触发时才触发回调。
+            .{keyCode | keyAlias} - 只当事件是从特定键触发时才触发回调。
+            .native - 监听组件根元素的原生事件。
+            .once - 只触发一次回调。
+            .left - (2.2.0) 只当点击鼠标左键时触发。 ==（键盘光标键）
+            .right - (2.2.0) 只当点击鼠标右键时触发。==（键盘光标键）
+            .up 键盘光标键
+            .down 键盘光标键
+            .middle - (2.2.0) 只当点击鼠标中键时触发。
+            .passive - (2.3.0) 以 { passive: true } 模式添加侦听器
+                允许事件连写
+                vo-on:click.self.stop
+            -->
+            <div class="div1" v-on:click="fun3">
+                <div class="div2" v-on:click.self.stop="fun4()">
+                    <div class="div3" v-on:click.stop="fun5()"></div>
+                </div>
+            </div>
+            <hr>
+            <input type="text" v-on:keyup="printStr($event)" v-model="msg">
+
+            <!--
+                     v-on 可以接 内置的修饰符
+                        允许事件连写
+            -->
+            <input type="text" v-on:keyup.13="printStr1()" v-model="msg">
+
+        </div>
+    </div>
+    <hr>
+
+    <div>
+        <input type="button" value="原生事件" onclick="print(event)">
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <script src="../js/vue.js"></script>
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <title> checkbox</title>
+  <script>
+      $(function () {
+          new Vue({
+              el:"#app",
+              data:{
+                  msg:"全选",
+                  flag:false,
+                  checkArr:[]
+              },
+              methods:{
+                  setCheckAll() {
+                      this.flag = !this.flag;
+                  },
+                  setCheck() {
+                      //大专
+                     /* if (this.checkArr.length == 3) {
+                          this.flag = true;
+                          return;
+                      }
+                          this.flag = false;*/
+
+
+
+                   /*  this.flag=false;
+                     if(this.checkArr.length==3){
+                         this.flag=true;
+                     }*/
+
+/*
+                      this.flag = this.checkArr.length == 3 ? true : false;
+*/
+                      this.flag = this.checkArr.length == 3 ;
+                  },
+                  setCheckAllArr() {
+                      if (this.flag) {
+                          // this.checkArr.push("a");
+                          // this.checkArr.push("b");
+                          // this.checkArr.push("c");
+                          this.checkArr = ["a", "b", "c"];
+                          return;
+                      }
+                      this.checkArr = [];
+                  }
+
+
+              }
+
+          });
+
+      });
+  </script>
+    <style>
+        table {
+            border: 1px solid black;
+
+        }
+        tr,td,th{
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+
+<table id="app" >
+    <thead >
+        <tr>
+            <th><input type="checkbox"   v-model="flag" v-on:change="setCheckAllArr()">{{msg}}</th>
+            <th>ID</th>
+            <th>Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><input type="checkbox"  v-model="checkArr" value="a"  v-on:change="setCheck()"></td>
+            <td>1</td>
+            <td>a</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox"  v-model="checkArr" value="b" v-on:change="setCheck()"></td>
+            <td>2</td>
+            <td>d</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" v-model="checkArr"  value="c"  v-on:change="setCheck()"></td>
+            <td>3</td>
+            <td>c</td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>

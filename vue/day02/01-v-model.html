@@ -6,25 +6,29 @@
     <script src="../js/vue.js"></script>
     <script src="../js/jquery-3.2.1.min.js"></script>
     <script>
+
         $(() => {
             new Vue({
                 el: "#app01",
                 data: {
                     msg01: "v-mode和表单建立组建的关系",
                     str: "初始值",
-                    taStr:"123\n123\n123\n13",
-                    gender:""
-
+                    taStr: "123\n123\n123\n13",
+                    gender: "a",
+                    num: 100,
+                    flag: false,
+                    // hobbies:"",
+                    // hobbies:{}
+                    hobbies: [],
+                    selectDate: []
                 }
-
             });
-
-
         });
         let getValue=()=> {
             let str=$("#aa").val();
             console.log(str)
         }
+
     </script>
 </head>
 <body>
@@ -50,17 +54,69 @@
         <pre>
             单选按钮是 同组 互斥的
             v-model 对于单选按钮的绑定 用于操作 check属性
-            获取的是 选中状态的value 值
+            获取的是 选中状态的value
+            w3c 中 单选按钮 没有value 时，提交的数据是on或者off
+            v-model 只关心value的值
+            v-model 在没有name的状态下，依然可以完成单选按钮的互斥效果，==> 假互斥
+            v-model 使用 ===  绑定值 + ""
+            AnjularJs  单选=true , false
         </pre>
         <h3>2. 表单的选择组件</h3>
-        <input type="radio" name="gender" id="a" value="a" checked v-model="gender"> a
+        <input type="radio" name="gender" id="a" value="a"  v-model="gender"> a
         <input type="radio" name="gender" id="b" value="b" v-model="gender"> b
-
-
         <br>
+        <hr>
+        <pre>
+
+            v-model 和复选框
+            复选框，value 存在与否 所造成的影响 还需要参考绑定值的类型
+            绑定值的类型 number boolean String =》vue 认为复选框是记录（true|false)
+            绑定值为array  => 获取对应的value值
+            绑定值为object =>  如果是对象，默认是select 状态
+            如果不定义name 依然保持分组状态， 不过是假分组
+        </pre>
+        <input type="checkbox" name="hobbies" v-model="hobbies" value="吃饭">
+        <input type="checkbox" name="hobbies" v-model="hobbies" value="睡觉">
+        <input type="checkbox" name="hobbies" v-model="hobbies" value="逛街">
+        <input type="checkbox" name="hobbies" v-model="hobbies" value="打豆豆">
+
+
+        <pre>
+        单选下拉列表
+        v-model 和下拉列表的影响
+        v-model 在下拉表聊中进行数据的双向绑定时，该指令需要被定影到select 标签
+        v-model 操作的是option 在标签中select 属性
+                如果是 定义了value 获取value的值
+                如果定义了
+        多选下拉列表时 (multiple) v-model  和select 进行双向绑定时，必须Array
+
+    </pre>
+      <!--  <select v-model="selectDate">
+            <option value="a">a</option>
+            <option value="b">b</option>
+            <option value="c">c</option>
+            <option value="d">d</option>
+        </select>
+        -->
+
+        <select v-model="selectDate" multiple>
+            <option value="a">a</option>
+            <option value="b">b</option>
+            <option value="c">c</option>
+            <option value="d">d</option>
+        </select>
     </div>
     <hr>
     <input type="button" value="获取值" onclick="getValue()">
 
+    <br>
+
+   <!-- <select  v-model="selectDate" >
+        <option value="a">a</option>
+        <option value="b">b</option>
+        <option value="c">c</option>
+        <option>d</option>
+        <option>e</option>
+    </select>-->
 </body>
 </html>
